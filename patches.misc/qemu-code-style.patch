@@ -1,0 +1,19 @@
+--- xen-4.6.6/tools/qemu-xen/hw/i386/intel_iommu.c.orig	2017-10-12 23:46:39.035000000 +0200
++++ xen-4.6.6/tools/qemu-xen/hw/i386/intel_iommu.c	2017-10-12 23:46:56.136000000 +0200
+@@ -1191,6 +1191,7 @@
+         return false;
+     }
+     if (inv_desc->lo & VTD_INV_DESC_WAIT_SW) {
++        dma_addr_t status_addr;
+         /* Status Write */
+         uint32_t status_data = (uint32_t)(inv_desc->lo >>
+                                VTD_INV_DESC_WAIT_DATA_SHIFT);
+@@ -1198,7 +1199,7 @@
+         assert(!(inv_desc->lo & VTD_INV_DESC_WAIT_IF));
+ 
+         /* FIXME: need to be masked with HAW? */
+-        dma_addr_t status_addr = inv_desc->hi;
++        status_addr = inv_desc->hi;
+         VTD_DPRINTF(INV, "status data 0x%x, status addr 0x%"PRIx64,
+                     status_data, status_addr);
+         status_data = cpu_to_le32(status_data);
