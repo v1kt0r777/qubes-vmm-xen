@@ -1,7 +1,7 @@
 sudo: required
 dist: trusty
 language: minimal
-install: git clone https://github.com/"${TRAVIS_REPO_SLUG%%/*}"/qubes-builder ~/qubes-builder
+install: git clone https://github.com/"${TRAVIS_REPO_SLUG%%/*}"/qubes-builder ~/qubes-builder -b archlinux
 script: ~/qubes-builder/scripts/travis-build
 # keep the log under 4MB limit
 env:
